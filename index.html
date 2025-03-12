@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Against Saturation</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.2.1/dygraph.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+          <img src="icon.png" alt="Image description" width="128">
+          <div>
+            <h1>Against Saturation:<br> BEST Qualitative Sampling</h1>
+            <h4>Randal Cox, Brad Sagarin</h4>
+          </div>
+        </div>
+        <!-- Form Box -->
+        <div class="form-box">
+            <table>
+                <tr>
+                    <td><label for="C">C <span class="desc">[confidence]</span></label></td>
+                    <td>
+                        <input type="number" id="C" value="95" step="1" min="0", max="100" oninput="updateAll()">
+                        <span class="percent">%</span>
+                    </td>
+
+                    <td><label for="dP">∆p <span class="desc">[percent change]</span></label></td>
+                    <td>
+                        <input type="number" id="dP" value="1" step="0.1"  min="0", max="10" oninput="updateAll()">
+                        <span class="percent">%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="O">O <span class="desc">[observed]</span></label></td>
+                    <td><input type="number" id="O" value="1" step="1"  min="1", max="5" oninput="updateAll()"></td>
+
+                    <td><label for="maxP">p<sub>max</sub> <span class="desc">[maximum probability]</span></label></td>
+                    <td>
+                        <input type="number" id="maxP" value="50" step="1"  min="0", max="100" oninput="updateAll()">
+                        <span class="percent">%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="N">N <span class="desc">[maximum samples]</span></label></td>
+                    <td><input type="number" id="N" value="50" step="1"  min="1", max="1000" oninput="updateAll()"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Tabbed Navigation -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('nfromp')">n from p</div>
+            <div class="tab" onclick="switchTab('pfromn')">p from n</div>
+            <div class="tab" onclick="switchTab('missingmass')">missing mass</div>
+        </div>
+
+        <!-- Content Box -->
+        <div class="content-container">
+            <div id="nfromp" class="content">
+                <div id="chartContainerNfromP"></div>
+                <div id="tableContainerNfromP"></div>
+            </div>
+
+            <div id="pfromn" class="content active">
+                <div id="chartContainerPfromN"></div>
+                <div id="tableContainerPfromN"></div>
+            </div>
+            <div id="missingmass" class="content">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        Enter the tags you have encountered, one row for each sample. Tags should be comma-delimited.
+                    </div>
+                    <div>
+                        <button onclick="fillDemoTags()" style="white-space: nowrap; min-width: 110px;">Demo Data</button>
+                    </div>
+                </div>
+                <br/>
+
+
+                <textarea id="tagInput" rows="5" cols="50" oninput="updateMissingMass()"></textarea>
+                <div id="chartContainerMissingMass"></div>
+                <div id="missingMassTable"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Citation: Add your citation here.</p>
+            <p>Github: Add your github repository here.</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+</html>

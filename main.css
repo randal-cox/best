@@ -1,0 +1,254 @@
+/* === Global Styles === */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f5f9f6;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Headings (H1 - H4) === */
+h1, h2, h3, h4 {
+    text-align: center;
+    color: #2c662d;
+}
+
+/* === Form Box Styling === */
+.form-box {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* === Input Fields === */
+table {
+    width: 100%;
+}
+
+td {
+    padding: 8px;
+}
+
+label {
+    font-weight: bold;
+    color: #2c662d;
+    display: inline-block;
+}
+
+.desc {
+    font-size: 12px;
+    color: #666;
+    margin-left: 5px;
+}
+
+input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.percent {
+    font-size: 14px;
+    color: #2c662d;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+/* === Tabs Styling === */
+.tabs {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 10px;
+    position: relative;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #2c662d;
+    background: #c8e6c9;
+    color: #2c662d;
+    margin-right: 5px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    position: relative;
+    top: 1px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.tab:hover {
+    background: #81c784;
+    color: white;
+}
+
+.tab.active {
+    background: #388e3c;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+/* === Content Box Styling === */
+.content-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background: white;
+    position: relative;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
+}
+
+/* === Footer Styling === */
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+/* === Chart and Table Styling === */
+#chartContainer {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#dygraph {
+    width: 100%;
+    height: 300px;
+}
+
+#tableContainer {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px; /* Push the table further down */
+}
+
+details {
+    text-align: left;
+    width: 100%;
+}
+
+summary {
+    background: #c8e6c9;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* === Tables === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: #388e3c;
+    color: white;
+}
+
+/* === Dygraph Labels === */
+.dygraph-label {
+    position: absolute;
+}
+
+/* X-axis title: Centered & Properly Spaced */
+.dygraph-xlabel {
+    position: absolute !important;
+    text-align: center !important;
+    bottom: -8px !important;  /* Moves the x-axis title UP */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Y-axis title: Rotated & Precisely Shifted Right */
+.dygraph-ylabel {
+    position: absolute !important;
+    text-align: center !important;
+    left: 120px !important; /* Moved significantly **right** */
+    top: 50% !important;
+    transform: rotate(-90deg) translateY(-50%) !important;
+    transform-origin: center center !important;
+    white-space: nowrap !important;
+}
+textarea {
+    width: 95%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+button {
+    background: #388e3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #2c662d;
+}
+.dygraph-legend {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    min-width: 250px !important; /* Increased width */
+    max-width: 300px !important; /* Allows larger text */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 15px; /* Extra padding for readability */
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: right !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    z-index: 10;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header img {
+  margin-right: 20px;
+}
+.header div {
+  text-align: left;
+}
