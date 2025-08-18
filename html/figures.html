@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>BEST – Paper Figures</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="figures.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.2.1/dygraph.min.js"></script>
+  <style>
+    .figure { margin: 24px 0 40px; }
+    .fig-title { margin-bottom: 10px; }
+    .chart { width: 100%; height: 360px; }
+    .note { font-size: 13px; color:#555; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="icon.png" width="128" alt="">
+      <div>
+        <h1>BEST – Figure Generator</h1>
+        <h4>Reusable charts for the manuscript</h4>
+      </div>
+    </div>
+
+    <div class="fig-wrap">
+      <h2 class="fig-title">Fig 1. Trials Needed (n) vs Tag Probability (p)</h2>
+      <div id="fig1" class="chart"></div>
+      <div class="btn-row">
+        <button id="save1" class="btn-green">Save SVG</button>
+        <button id="save1png" class="btn-green">Save PNG</button>
+      </div>
+    </div>
+    
+    <div class="fig-wrap">
+      <h2 class="fig-title">Fig 2. Minimum Tag Probability (p) vs Trials (n)</h2>
+      <div id="fig2" class="chart"></div>
+      <div class="btn-row">
+        <button id="save2" class="btn-green">Save SVG</button>
+        <button id="save2png" class="btn-green">Save PNG</button>
+      </div>
+    </div>
+    
+    <div class="fig-wrap">
+      <h2 class="fig-title">Fig 3. Trials Needed (n) for ≥ O Observations (C=95%)</h2>
+      <div id="fig3" class="chart"></div>
+      <div class="btn-row">
+        <button id="save3" class="btn-green">Save SVG</button>
+        <button id="save3png" class="btn-green">Save PNG</button>
+      </div>
+    </div>
+
+
+  <script src="main.js"></script>
+  <script src="figures.js"></script>
+
+</body>
+</html>

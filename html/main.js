@@ -334,3 +334,56 @@ function switchTab(tabId) {
 
     updateAll();
 }
+
+
+
+// *********************************************************
+// Code for figures.html
+// *********************************************************
+// ----- BEST figure helpers (pure) -----
+function best_nFromP(C, p){ return Math.ceil(Math.log(1 - C/100)/Math.log(1 - p)); }
+function best_pFromN(C, n){ return 1 - Math.exp(Math.log(1 - C/100)/n); }
+
+// cumulative binomial via iterative PMF (k=0..K)
+function best_binomCDF_leqK(n, p, K){
+  let pmf = Math.pow(1-p, n); // k=0
+  let cdf = pmf;
+  for (let k=0; k<K; k++){
+    pmf = pmf * (n-k)/(k+1) * (p/(1-p));
+    cdf += pmf;
+  }
+  return cdf;
+}
+function best_nForAtLeastO(C, p, O, nMax=1000){
+  const target = 1 - C/100;
+  for (let n=O; n<=nMax; n++){
+    if (best_binomCDF_leqK(n, p, O-1) <= target) return n;
+  }
+  return NaN;
+}
+
+// optional: multi-C plotters that return {labels, rows}
+function best_series_nFromP_multi(confList, pMin, pMax, step){
+  const labels = ['p', ...confList.map(c=>`C=${c}%`)];
+  const rows = [];
+  for (let p=pMin; p<=pMax+1e-12; p+=step){
+    rows.push([p, ...confList.map(c=>best_nFromP(c,p))]);
+  }
+  return {labels, rows};
+}
+function best_series_pFromN_multi(confList, nMax){
+  const labels = ['n', ...confList.map(c=>`C=${c}%`)];
+  const rows = [];
+  for (let n=1; n<=nMax; n++){
+    rows.push([n, ...confList.map(c=>best_pFromN(c,n))]);
+  }
+  return {labels, rows};
+}
+function best_series_nForAtLeastO(C, O, pMin, pMax, step){
+  const labels = ['p', `n (C=${C}%, O=${O})`];
+  const rows = [];
+  for (let p=pMin; p<=pMax+1e-12; p+=step){
+    rows.push([p, best_nForAtLeastO(C, p, O)]);
+  }
+  return {labels, rows};
+}
