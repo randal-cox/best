@@ -252,3 +252,70 @@ button:hover {
 .header div {
   text-align: left;
 }
+/* Help icon and popover */
+.help-icon {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  color: #2c662d;
+  user-select: none;
+}
+.help-icon:hover { opacity: 0.85; }
+
+.help-popover {
+  position: fixed;
+  z-index: 9999;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 520px;
+  width: calc(100% - 40px);
+  background: #fff;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.help-popover-content {
+  padding: 16px 18px 14px 18px;
+}
+.help-popover h4 {
+  margin: 0 0 10px 0;
+  color: #2c662d;
+}
+.help-close {
+  float: right;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  color: #2c662d;
+}
+.help-popover p, .help-popover ul {
+  margin: 8px 0;
+}
+.help-popover ul {
+  padding-left: 18px;
+}
+.help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #2c662d;
+  font-size: 12px;
+  font-style: italic;   /* <<-- forces italic */
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  color: #2c662d;
+  background-color: #f5fff5;
+  user-select: none;
+}
+.help-icon:hover {
+  background-color: #d9f2d9;
+}

@@ -23,33 +23,64 @@
       </div>
     </div>
 
-    <div class="fig-wrap">
-      <h2 class="fig-title">Fig 1. Trials Needed (n) vs Tag Probability (p)</h2>
-      <div id="fig1" class="chart"></div>
-      <div class="btn-row">
-        <button id="save1" class="btn-green">Save SVG</button>
-        <button id="save1png" class="btn-green">Save PNG</button>
+    <!-- ===================== FIG 1 and Fig S1: n from p, C ===================== -->
+<!--    <div class="fig-wrap">-->
+<!--      <h2 class="fig-title">Fig 1: Trials Needed (n) vs Theme Probability (p)</h2>-->
+<!--      <div id="fig1" class="chart"></div>-->
+<!--      <div class="btn-row">-->
+<!--        <button id="save1" class="btn-green">Save SVG</button>-->
+<!--        <button id="save1png" class="btn-green">Save PNG</button>-->
+<!--      </div>-->
+<!--    </div>-->
+    <section>
+      <h3>Fig 1: Trials needed n vs theme probability p</h3>
+      <div class="chart-wrap">
+        <div id="fig1mc" class="chart"></div>
+        <div id="fig1mc-loading" class="chart-loading" aria-live="polite">⏳ Running Monte Carlo Simulations...</div>
       </div>
-    </div>
-    
-    <div class="fig-wrap">
-      <h2 class="fig-title">Fig 2. Minimum Tag Probability (p) vs Trials (n)</h2>
-      <div id="fig2" class="chart"></div>
       <div class="btn-row">
-        <button id="save2" class="btn-green">Save SVG</button>
-        <button id="save2png" class="btn-green">Save PNG</button>
+        <button id="save1mc" class="btn-green">Save SVG</button>
+        <button id="save1mcpng" class="btn-green">Save PNG</button>
       </div>
-    </div>
-    
-    <div class="fig-wrap">
-      <h2 class="fig-title">Fig 3. Trials Needed (n) for ≥ O Observations (C=95%)</h2>
-      <div id="fig3" class="chart"></div>
-      <div class="btn-row">
-        <button id="save3" class="btn-green">Save SVG</button>
-        <button id="save3png" class="btn-green">Save PNG</button>
-      </div>
-    </div>
+    </section>
 
+    <!-- ===================== FIG 2 and Fig S2: p from n, C ===================== -->
+    <section>
+      <h3>Fig 2: Minimum theme probability (p) vs trials needed (n)</h3>
+      <div class="chart-wrap">
+        <div id="fig2mc" class="chart"></div>
+        <div id="fig2mc-loading" class="chart-loading" aria-live="polite">⏳ Running Monte Carlo Simulations...</div>
+      </div>
+      <div class="btn-row">
+        <button id="save2mc" class="btn-green">Save SVG</button>
+        <button id="save2mcpng" class="btn-green">Save PNG</button>
+      </div>
+    </section>
+
+    <section>
+      <h3>Fig 3: Trials needed n for ≥O occurrences (C = 95%)</h3>
+      <div class="chart-wrap">
+        <div id="fig3mc" class="chart"></div>
+        <div id="fig3mc-loading" class="chart-loading" aria-live="polite">⏳ Running Monte Carlo Simulations...</div>
+      </div>
+      <div class="btn-row">
+        <button id="save3mc" class="btn-green">Save SVG</button>
+        <button id="save3mcpng" class="btn-green">Save PNG</button>
+      </div>
+    </section>
+
+    <!-- ===================== Supplemental Figure 4 ===================== -->
+    <section class="figure">
+      <h3>Supplemental Figure 4 — Missing mass vs. trials (theory ± SE vs. MC)</h3>
+
+      <div id="fig4mc" class="chart" aria-label="Missing mass figure"></div>
+      <div id="fig4mc-loading" class="loading-overlay" aria-hidden="true">⏳ Rendering Monte Carlo…</div>
+
+      <div class="controls">
+        <button id="save4mc" class="btn">Save SVG</button>
+        <button id="save4mcpng" class="btn">Save PNG</button>
+      </div>
+    </section>
 
   <script src="main.js"></script>
   <script src="figures.js"></script>

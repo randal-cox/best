@@ -1,7 +1,88 @@
 document.addEventListener("DOMContentLoaded", function () {
     switchTab("nfromp"); // Open "p from n" by default
     updateAll(); // Ensure all charts load immediately
+    initHelpUI(); // wire up the help popover
 });
+
+
+// ---- Help content per panel ----
+const HELP_TEXT = {
+  nfromp: {
+    title: "n from p — Trials Needed for Themes",
+    html: `
+      <p>Compute the minimum number of trials <em>n</em> needed so that you
+         observe at least <em>O</em> occurrences of a theme with probability <em>p</em>
+         at confidence <em>C</em>.</p>
+      <ul>
+        <li><b>C</b>: Confidence level (e.g., 95%).</li>
+        <li><b>Δp</b>: Step size used to sweep probabilities along the x-axis.</li>
+        <li><b>O</b>: Required occurrences (1 = at least one).</li>
+        <li><b>p<sub>max</sub></b>: Maximum probability shown.</li>
+        <li><b>N</b>: Max trials shown in tables (not used in this chart).</li>
+      </ul>
+      <p>The chart is log–log; hover to read off values. Click "Show Table" to list all values from chart.</p>
+    `
+  },
+  pfromn: {
+    title: "p from n — Minimum Theme Probability",
+    html: `
+      <p>For each trial count <em>n</em>, compute the smallest theme probability <em>p</em>
+         that meets the “at least <em>O</em> occurrences” criterion at confidence <em>C</em>.</p>
+      <ul>
+        <li>Log x-axis in <em>n</em>, linear y-axis in <em>p</em>.</li>
+        <li>Use this to set detection limits for your sample size.</li>
+      </ul>
+      <p>Click "Show Table" to list all values from the chart.</p>
+    `
+  },
+  missingmass: {
+    title: "Missing Mass — Good–Turing (Observed Data)",
+    html: `
+      <p>Paste your observed <b>themes</b> per sample (one line per sample,
+         comma-separated). The tool computes the Good–Turing missing mass
+         estimate <em>R̂ = f₁/m</em> and a conservative upper bound.</p>
+      <ul>
+        <li><b>Themes per line</b>: comma-delimited; duplicates on a line are counted once.</li>
+        <li><b>Singletons (f₁)</b>: themes seen exactly once so far.</li>
+        <li><b>m</b>: total theme tokens observed so far.</li>
+      </ul>
+      <p>Use “Demo Data” to see the workflow.</p>
+      <p>Click "Show Table" to list all values from the chart.</p>
+    `
+  }
+};
+
+// ---- Help popover wiring ----
+function initHelpUI(){
+  const pop = document.getElementById('help-popover');
+  const title = document.getElementById('help-title');
+  const body = document.getElementById('help-body');
+  const closeBtn = pop.querySelector('.help-close');
+
+  function openHelp(key){
+    const spec = HELP_TEXT[key];
+    if (!spec) return;
+    title.textContent = spec.title;
+    body.innerHTML = spec.html;
+    pop.style.display = 'block';
+  }
+  function closeHelp(){ pop.style.display = 'none'; }
+
+  document.querySelectorAll('.help-icon').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      const key = el.getAttribute('data-help');
+      openHelp(key);
+      e.stopPropagation();
+    });
+  });
+
+  closeBtn.addEventListener('click', closeHelp);
+  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeHelp(); });
+  document.addEventListener('click', (e)=>{
+    if (e.target === pop) closeHelp(); // click outside content closes
+  });
+}
+
 
 /* === Updates Both Charts === */
 function updateAll() {
@@ -99,7 +180,7 @@ function binomial(n, k) {
 function renderNFromPChart(results, C, O) {
     let chartDiv = document.getElementById("chartContainerNfromP");
     chartDiv.innerHTML = `
-        <h3>Trials Needed to Sample Tag ${O} Times</h3>
+        <h3>Trials Needed to Sample Theme ${O} Times</h3>
         <p>At ${(C * 100).toFixed(1)}% Confidence</p>
         <div id="dygraph-nfromp" style="position: relative;"></div>
     `;
@@ -112,6 +193,16 @@ function renderNFromPChart(results, C, O) {
         axes: {
             x: { logscale: true },
             y: { logscale: true }
+        },
+        legend: "always",
+        legendFormatter: function(data) {
+          if (data.x == null) return '';
+          const lines = [`p = ${data.x.toFixed(2)}`];  // <-- only 2 decimals
+          for (const row of data.series) {
+            if (!row.isVisible) continue;
+            lines.push(`${row.label}: ${row.yHTML}`);
+          }
+          return lines.join('<br/>');
         }
     });
 }
@@ -134,7 +225,9 @@ function renderPFromNChart(results, C, O) {
         axes: {
             x: { logscale: true },
             y: { logscale: false }
-        }
+        },
+        legend: "always",
+
     });
 }
 
@@ -217,7 +310,7 @@ function renderMissingMassTable(results) {
             <table style="margin-top: 10px;">
                 <tr>
                     <th>n</th>
-                    <th>Total Tags (T)</th>
+                    <th>Total Themes (T)</th>
                     <th>Singlets (f1)</th>
                     <th>Expected Missing Mass (E)</th>
                     <th>Maximum Missing Mass</th>
@@ -273,7 +366,7 @@ function renderMissingMassChart(results) {
                 valueFormatter: v => v.toFixed(3) // Rounds to 3 decimal places
             }
         },
-        legend: "always"
+        legend: "always",
     });
 }
 

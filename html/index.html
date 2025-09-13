@@ -15,37 +15,57 @@
           <img src="icon.png" alt="Image description" width="128">
           <div>
             <h1>BEST - Sampling Tool</h1>
-            <h2>Randal Cox, Brad Sagarin</h2>
+            <h3>Randal Cox, Theandra Brin, Brad Sagarin</h3>
           </div>
         </div>
         <!-- Form Box -->
         <div class="form-box">
             <table>
                 <tr>
-                    <td><label for="C">C <span class="desc">[confidence]</span></label></td>
+                    <td>
+                        <label for="C" title="Confidence level for detection (e.g., 90, 95, 99).">
+                            C <span class="desc">[confidence]</span>
+                        </label>
+                    </td>
                     <td>
                         <input type="number" id="C" value="95" step="1" min="0", max="100" oninput="updateAll()">
                         <span class="percent">%</span>
                     </td>
 
-                    <td><label for="dP">∆p <span class="desc">[percent change]</span></label></td>
+                    <td>
+                        <label for="dP" title="Probability step used when sweeping p along the x-axis.">
+                          ∆p <span class="desc">[percent change]</span>
+                        </label>
+                    </td>
                     <td>
                         <input type="number" id="dP" value="1" step="0.1"  min="0", max="10" oninput="updateAll()">
                         <span class="percent">%</span>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="O">O <span class="desc">[observed]</span></label></td>
+                    <td>
+                        <label for="O" title="Minimum number of occurrences required.">
+                          O <span class="desc">[observed]</span>
+                        </label>
+                    </td>
                     <td><input type="number" id="O" value="1" step="1"  min="1", max="5" oninput="updateAll()"></td>
 
-                    <td><label for="maxP">p<sub>max</sub> <span class="desc">[maximum probability]</span></label></td>
+                    <td>
+                        <label for="maxP" title="Maximum probability shown on the x-axis.">
+                          p<sub>max</sub> <span class="desc">[maximum probability]</span>
+                        </label>
+                    </td>
                     <td>
                         <input type="number" id="maxP" value="50" step="1"  min="0", max="100" oninput="updateAll()">
                         <span class="percent">%</span>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="N">N <span class="desc">[maximum samples]</span></label></td>
+                    <td>
+                        <label for="N" title="Maximum trials shown in tables and charts where applicable.">
+                          N <span class="desc">[maximum samples]</span>
+                        </label>
+                    </td>
                     <td><input type="number" id="N" value="50" step="1"  min="1", max="1000" oninput="updateAll()"></td>
                 </tr>
             </table>
@@ -53,11 +73,25 @@
 
         <!-- Tabbed Navigation -->
         <div class="tabs">
-            <div class="tab active" onclick="switchTab('nfromp')">n from p</div>
-            <div class="tab" onclick="switchTab('pfromn')">p from n</div>
-            <div class="tab" onclick="switchTab('missingmass')">missing mass</div>
+          <div class="tab active" onclick="switchTab('nfromp')"  title="Given p and O, find the minimum n.">
+              <span class="help-icon" data-help="nfromp">?</span> n from p
+          </div>
+            <div class="tab" onclick="switchTab('pfromn')" title="Given n and O, find the minimum p.">
+              <span class="help-icon" data-help="pfromn">?</span> p from n
+            </div>
+            <div class="tab" onclick="switchTab('missingmass')" title="Compute Good–Turing missing mass from your observed themes.">
+              <span class="help-icon" data-help="missingmass">?</span> missing mass
+            </div>
         </div>
 
+        <!-- Add a single shared popover container near the end of body -->
+        <div id="help-popover" class="help-popover" role="dialog" aria-modal="false" style="display:none;">
+          <div class="help-popover-content">
+            <button class="help-close" aria-label="Close">✕</button>
+            <h4 id="help-title"></h4>
+            <div id="help-body"></div>
+          </div>
+        </div>
         <!-- Content Box -->
         <div class="content-container">
             <div id="nfromp" class="content">
@@ -72,7 +106,7 @@
             <div id="missingmass" class="content">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        Enter the tags you have encountered, one row for each sample. Tags should be comma-delimited.
+                        Enter the themes you have encountered, one row for each sample. Tags should be comma-delimited.
                     </div>
                     <div>
                         <button onclick="fillDemoTags()" style="white-space: nowrap; min-width: 110px;">Demo Data</button>
@@ -81,7 +115,7 @@
                 <br/>
 
 
-                <textarea id="tagInput" rows="5" cols="50" oninput="updateMissingMass()"></textarea>
+                <textarea id="tagInput" rows="5" cols="50" oninput="updateMissingMass()" placeholder="e.g., trust, openness&#10;openness, safety&#10;..."></textarea>
                 <div id="chartContainerMissingMass"></div>
                 <div id="missingMassTable"></div>
             </div>
